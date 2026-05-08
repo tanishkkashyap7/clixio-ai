@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clixio — Turn Thoughts Into Action</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-base: #0a0a14;
+      --bg-elev: rgba(255, 255, 255, 0.04);
+      --bg-elev-hover: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --text: #f5f5f7;
+      --text-dim: #a1a1aa;
+      --accent: #ffcc70;
+      --accent-2: #ff8177;
+      --accent-grad: linear-gradient(135deg, #ffcc70 0%, #ff8177 100%);
+      --accent-grad-hover: linear-gradient(135deg, #ffd485 0%, #ff9388 100%);
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.25);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.35);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-base);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255, 129, 119, 0.18), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 80% 30%, rgba(120, 90, 255, 0.18), transparent 60%),
+        radial-gradient(ellipse 60% 50% at 50% 90%, rgba(255, 204, 112, 0.12), transparent 60%),
+        linear-gradient(180deg, #0a0a14 0%, #11111d 100%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0);
+      background-size: 32px 32px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: rgba(10, 10, 20, 0.55);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 26px;
+      background: var(--accent-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .name::before {
+      content: "◆ ";
+      -webkit-text-fill-color: var(--accent);
+    }
+
+    .hi { display: flex; gap: 8px; align-items: center; }
+
+    .hi a {
+      text-decoration: none;
+      color: var(--text-dim);
+      font-weight: 500;
+      font-size: 14px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .hi a:hover {
+      color: var(--text);
+      background: var(--bg-elev);
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 100px 24px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--bg-elev);
+      border: 1px solid var(--border-strong);
+      border-radius: 100px;
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #4ade80;
+    }
+
+    .text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin: 0 0 20px;
+    }
+
+    .text .gradient {
+      background: var(--accent-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      color: var(--text-dim);
+      font-size: 18px;
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+
+    /* FORM */
+    .form-container {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .input-wrap {
+      display: flex;
+      gap: 8px;
+      padding: 8px;
+      background: var(--bg-elev);
+      border: 1px solid var(--border-strong);
+      border-radius: 18px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(12px);
+    }
+
+    .input-wrap:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(255, 204, 112, 0.12);
+    }
+
+    .form-container input[type="text"] {
+      flex: 1;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      font-size: 15px;
+      font-family: inherit;
+      background: transparent;
+      color: var(--text);
+    }
+
+    .form-container input::placeholder { color: var(--text-dim); }
+
+    .submit {
+      padding: 14px 26px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      background: var(--accent-grad);
+      color: #1a1a1a;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .submit:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .submit:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+      transform: none;
+    }
+
+    /* HOW IT WORKS */
+    .t2 {
+      text-align: center;
+      margin: 100px 0 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .t2-sub {
+      text-align: center;
+      color: var(--text-dim);
+      margin-bottom: 40px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .card {
+      padding: 28px 24px;
+      border-radius: var(--radius-md);
+      background: var(--bg-elev);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,204,112,0.05), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--accent-grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+
+    /* DEMO SECTION */
+    .demo {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 24px;
+      max-width: 1100px;
+      margin: 80px auto 40px;
+      padding: 0 24px;
+      align-items: start;
+    }
+
+    .fit, .dash {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      background: var(--bg-elev);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+    }
+
+    .fit-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .fit-header .pulse {
+      width: 8px; height: 8px;
+      background: #ff8177;
+      border-radius: 50%;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+
+    .fit-box {
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--text-dim);
+      transition: all 0.25s ease;
+      margin-bottom: 8px;
+    }
+
+    .fit-box.goal {
+      background: rgba(255, 204, 112, 0.08);
+      border-color: rgba(255, 204, 112, 0.2);
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .fit-box:hover {
+      transform: translateX(4px);
+      border-color: var(--border-strong);
+      color: var(--text);
+    }
+
+    .dash {
+      min-width: 0;
+    }
+
+    .dash h3 {
+      margin: 0 0 18px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .dash-box {
+      min-height: 220px;
+      max-height: 400px;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      overflow: auto;
+      border: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.25);
+      padding: 18px;
+      text-align: left;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .dash-box::-webkit-scrollbar { width: 6px; }
+    .dash-box::-webkit-scrollbar-track { background: transparent; }
+    .dash-box::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+
+    #dashboard-content { outline: none; }
+    #dashboard-content ul { list-style: none; padding: 0; margin: 0; }
+
+    #dashboard-content li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      transition: all 0.25s;
+      margin-bottom: 4px;
+    }
+
+    #dashboard-content li:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .expand-step-btn {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      border-radius: 8px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.25s;
+      flex-shrink: 0;
+    }
+
+    .expand-step-btn:hover {
+      background: var(--accent);
+      color: #1a1a1a;
+      border-color: var(--accent);
+      transform: scale(1.08);
+    }
+
+    #dashboard-content input[type="checkbox"] {
+      width: 18px; height: 18px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    #dashboard-content label {
+      flex: 1;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    #dashboard-content input[type="checkbox"]:checked + label {
+      text-decoration: line-through;
+      color: var(--text-dim);
+      opacity: 0.6;
+    }
+
+    .dash-btns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .dash-btns button {
+      flex: 1;
+      min-width: 90px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-strong);
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 13px;
+      font-family: inherit;
+      background: var(--bg-elev);
+      color: var(--text);
+      transition: all 0.25s ease;
+    }
+
+    .dash-btns button:hover {
+      background: var(--bg-elev-hover);
+      transform: translateY(-1px);
+    }
+
+    .dash-btns button.primary {
+      background: var(--accent-grad);
+      color: #1a1a1a;
+      border-color: transparent;
+      font-weight: 600;
+    }
+
+    .dash-btns button.primary:hover {
+      box-shadow: 0 6px 20px rgba(255, 129, 119, 0.35);
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      text-align: center;
+      max-width: 700px;
+      margin: 100px auto 60px;
+      padding: 60px 24px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-elev);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-strong);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at top, rgba(255, 129, 119, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+
+    .start {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.8px;
+      position: relative;
+    }
+
+    .start-sub {
+      color: var(--text-dim);
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .get {
+      padding: 14px 32px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      background: var(--accent-grad);
+      color: #1a1a1a;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .get:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* MODAL */
+    .modal {
+      visibility: hidden;
+      opacity: 0;
+      position: fixed;
+      inset: 0;
+      z-index: 1001;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .modal.show { visibility: visible; opacity: 1; }
+
+    .modal-content {
+      background: linear-gradient(180deg, #1a1a26 0%, #14141e 100%);
+      padding: 32px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-strong);
+      width: 100%;
+      max-width: 540px;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.95) translateY(10px);
+      transition: transform 0.3s;
+    }
+
+    .modal.show .modal-content { transform: scale(1) translateY(0); }
+
+    .modal-content h4 {
+      margin: 0 0 16px;
+      color: var(--accent);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      letter-spacing: -0.3px;
+    }
+
+    .modal-content p {
+      line-height: 1.7;
+      color: var(--text);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .modal-close-btn {
+      float: right;
+      font-size: 24px;
+      color: var(--text-dim);
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+    }
+
+    .modal-close-btn:hover { color: var(--text); }
+
+    /* ANIMATIONS */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.6; }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .head { padding: 14px 20px; flex-wrap: wrap; gap: 12px; }
+      .hi { gap: 4px; }
+      .hi a { padding: 6px 10px; font-size: 13px; }
+      .hero { padding: 60px 20px 30px; }
+      .input-wrap { flex-direction: column; }
+      .submit { width: 100%; justify-content: center; }
+      .demo { grid-template-columns: 1fr; }
+      .t2 { margin-top: 60px; font-size: 28px; }
+      .start { font-size: 24px; }
+    }
+
+    /* FOOTER */
+    footer {
+      font-size: 14px;
+      text-align: center;
+      color: var(--text-dim);
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      padding: 32px 20px;
+      margin-top: 40px;
+    }
+
+    .footer-links { margin: 12px 0; }
+    .footer-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    .social-icons { margin-top: 8px; }
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px; height: 36px;
+      margin: 0 4px;
+      font-size: 14px;
+      text-decoration: none;
+      color: var(--text-dim);
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      transition: all 0.25s;
+    }
+    .social-icons a:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    /* TOOLTIP */
+    .tooltip { position: relative; }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 320px;
+      max-height: 320px;
+      overflow-y: auto;
+      background: linear-gradient(180deg, #1a1a26 0%, #14141e 100%);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      padding: 14px 16px;
+      border-radius: 12px;
+      position: absolute;
+      top: 130%;
+      right: 0;
+      opacity: 0;
+      transition: all 0.25s ease;
+      font-size: 13px;
+      line-height: 1.6;
+      box-shadow: var(--shadow-lg);
+      z-index: 1000;
+    }
+    .tooltip .tooltiptext ul { margin: 0; padding-left: 18px; }
+    .tooltip .tooltiptext li { margin-bottom: 6px; }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+      top: 120%;
+    }
+
+    /* TOAST */
+    #toast {
+      visibility: hidden;
+      min-width: 250px;
+      background: linear-gradient(135deg, #1a1a26, #14141e);
+      border: 1px solid var(--accent);
+      color: var(--text);
+      text-align: center;
+      border-radius: 12px;
+      padding: 14px 20px;
+      position: fixed;
+      z-index: 1002;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 30px;
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0;
+      transition: all 0.4s ease;
+      box-shadow: var(--shadow-lg);
+    }
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+      bottom: 50px;
+    }
+  </style>
+</head>
+<body>
+  <header class="head">
+    <div class="name">Clixio</div>
+    <nav class="hi">
+      <a href="#">Home</a>
+      <div class="tooltip">
+        <a href="#">About</a>
+        <span class="tooltiptext">
+          <ul>
+            <li>Clixio transforms your thoughts into actionable plans.</li>
+            <li>Helps users organize goals, track progress, and optimize productivity.</li>
+          </ul>
+        </span>
+      </div>
+      <div class="tooltip">
+        <a href="#">How it works</a>
+        <span class="tooltiptext">
+          <ul>
+            <li>Convert ideas, goals, or problems into actionable steps.</li>
+            <li>Easily organize personal and professional goals.</li>
+            <li>Receive smart suggestions to tackle goals efficiently.</li>
+            <li>Monitor progress with dashboards and indicators.</li>
+            <li>Edit and optimize plans on the fly.</li>
+            <li>Stay productive and maintain flow.</li>
+            <li>Intuitive interface for planning and execution.</li>
+            <li>Platform adapts to habits and improves suggestions.</li>
+          </ul>
+        </span>
+      </div>
+      <div class="tooltip">
+        <a href="#">Features</a>
+        <span class="tooltiptext">
+          <ul>
+            <li>Idea to Action Conversion</li>
+            <li>Goal Organization</li>
+            <li>Smart AI-driven Suggestions</li>
+            <li>Progress Tracking & Checklists</li>
+            <li>Refinement & Optimization</li>
+            <li>Productivity Insights</li>
+            <li>Adaptive Learning</li>
+            <li>Live Demo & Visualization</li>
+            <li>Export & Share Plans</li>
+          </ul>
+        </span>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      AI-powered planning, simplified
+    </div>
+    <h1 class="text">Turn your thoughts<br>into <span class="gradient">actions</span></h1>
+    <p class="hero-sub">Drop in any idea, goal, or problem — Clixio breaks it down into clear, actionable steps you can actually follow.</p>
+  </section>
+
+  <section class="form-container">
+    <div class="input-wrap">
+      <input type="text" id="text-input" placeholder="What's on your mind?" />
+      <button class="submit" id="submit-button">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Try Flow
+      </button>
+    </div>
+  </section>
+
+  <h2 class="t2">How it Works</h2>
+  <p class="t2-sub">Three simple steps to turn your ideas into reality.</p>
+
+  <div class="steps">
+    <div class="card">
+      <div class="card-icon"><i class="fa-solid fa-lightbulb"></i></div>
+      <div class="card-title">Input your goal</div>
+      <div class="card-desc">Share whatever's on your mind — big or small.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon"><i class="fa-solid fa-list-check"></i></div>
+      <div class="card-title">Get smart actions</div>
+      <div class="card-desc">AI generates clear, actionable steps instantly.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
+      <div class="card-title">Track your flow</div>
+      <div class="card-desc">Monitor progress and stay in your zone.</div>
+    </div>
+  </div>
+
+  <section class="demo">
+    <div class="fit">
+      <div class="fit-header"><span class="pulse"></span> Live Demo</div>
+      <div class="fit-box goal">💪 I want to get fit</div>
+      <div class="fit-box">1. Create a workout schedule</div>
+      <div class="fit-box">2. Start with 15 min daily walk</div>
+      <div class="fit-box">3. Track calories with an app</div>
+    </div>
+    <div>
+      <div class="dash" id="dashboard-container" style="display:none;">
+        <h3 id="dashboard-title">Your Action Plan</h3>
+        <div class="dash-box"><div id="dashboard-content">Your plan will appear here...</div></div>
+        <div class="dash-btns">
+          <button id="refine-btn"><i class="fa-solid fa-rotate"></i> Refine</button>
+          <button id="edit-btn"><i class="fa-solid fa-pen"></i> Edit</button>
+          <button class="primary" id="hurdles-btn">✨ Hurdles</button>
+          <button id="save-btn"><i class="fa-solid fa-bookmark"></i> Save</button>
+          <button id="export-btn"><i class="fa-solid fa-download"></i> Export</button>
+        </div>
+      </div>
+      <div class="dash" id="hurdles-container" style="display:none; margin-top:16px;">
+        <h3>⚠️ Potential Hurdles</h3>
+        <div class="dash-box"><div id="hurdles-content"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="start">Start your flow today 🚀</div>
+    <div class="start-sub">Join thousands turning ideas into action with Clixio.</div>
+    <button class="get" id="get-started-button">Get Started Free →</button>
+  </section>
+
+  <footer>
+    <p>All rights reserved © CLIXIO.in</p>
+    <div class="footer-links">
+      <a href="contact.html">Contact</a> ·
+      <a href="privacy.html">Privacy</a> ·
+      <a href="terms.html">Terms</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+  </footer>
+
+  <div id="toast"></div>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close-btn">&times;</button>
+      <h4 id="modal-title"></h4>
+      <p id="modal-body"></p>
+    </div>
+  </div>
+
+  <script>
+    // --- DOM ELEMENTS ---
+    const getStartedBtn = document.getElementById('get-started-button');
+    const inputField = document.getElementById('text-input');
+    const submitBtn = document.getElementById('submit-button');
+    const toast = document.getElementById("toast");
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const modalCloseBtn = document.querySelector('.modal-close-btn');
+    const dashboardContainer = document.getElementById('dashboard-container');
+    const dashboardTitle = document.getElementById('dashboard-title');
+    const dashboardContent = document.getElementById('dashboard-content');
+    const refineBtn = document.getElementById('refine-btn');
+    const editBtn = document.getElementById('edit-btn');
+    const saveBtn = document.getElementById('save-btn');
+    const exportBtn = document.getElementById('export-btn');
+    const hurdlesBtn = document.getElementById('hurdles-btn');
+    const hurdlesContainer = document.getElementById('hurdles-container');
+    const hurdlesContent = document.getElementById('hurdles-content');
+
+    let isEditable = false;
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.className = "show";
+      setTimeout(() => { toast.className = ""; }, 3000);
+    }
+
+    function showModal(title, body) {
+      modalTitle.innerText = title;
+      modalBody.innerHTML = body.replace(/\n/g, '<br>');
+      modal.classList.add('show');
+    }
+
+    function hideModal() { modal.classList.remove('show'); }
+
+    function formatAiResponseAsChecklist(text) {
+      const lines = text.split('\n').filter(line => line.trim() !== '');
+      let html = '<ul>';
+      lines.forEach((line, index) => {
+        const cleanLine = line.replace(/^\s*\d+[\.\-\)]\s*|\*\s*/, '').trim();
+        if (cleanLine) {
+          html += `<li>
+                    <input type="checkbox" id="task-${index}" />
+                    <label for="task-${index}">${cleanLine}</label>
+                    <button class="expand-step-btn" data-task="${cleanLine.replace(/"/g, '&quot;')}" title="Deep dive">🔍</button>
+                  </li>`;
+        }
+      });
+      return html + '</ul>';
+    }
+
+    function savePlan() {
+      if (!dashboardContent.innerHTML || dashboardContent.innerText.includes("Your plan will appear here")) return;
+      const planData = {
+        prompt: dashboardTitle.innerText.replace("Action Plan for: ", ""),
+        htmlContent: dashboardContent.innerHTML,
+      };
+      localStorage.setItem('clixioPlan', JSON.stringify(planData));
+    }
+
+    function loadPlan() {
+      const savedPlan = localStorage.getItem('clixioPlan');
+      if (savedPlan) {
+        const planData = JSON.parse(savedPlan);
+        dashboardTitle.innerText = `Action Plan for: ${planData.prompt}`;
+        dashboardContent.innerHTML = planData.htmlContent;
+        dashboardContainer.style.display = "block";
+      }
+    }
+
+    async function callOpenAI(prompt) {
+  const API_URL = "http://localhost:3000/api/generate";
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt }),
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.text || `HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("📦 Backend response:", data);
+
+    if (typeof data.text === "string" && data.text.trim()) {
+      return data.text;
+    }
+
+    return "AI returned an empty response. Please try again!";
+  } catch (error) {
+    console.error("❌ Frontend error:", error);
+    return `⚠️ ${error.message || "Could not connect to server. Make sure backend is running on port 3000."}`;
+  }
+}
+
+    async function generatePlan(userInput) {
+      dashboardContainer.style.display = "block";
+      hurdlesContainer.style.display = "none";
+      dashboardContent.innerHTML = "⏳ Thinking...";
+      submitBtn.disabled = true;
+
+      const prompt = `You are "Clixio", an AI assistant that transforms thoughts into actionable plans. A user has the following thought: "${userInput}". Break this down into a simple, numbered list of 3 to 5 clear, actionable steps. Keep the tone encouraging and direct. Start the list immediately without any introductory sentence.`;
+      const aiText = await callOpenAI(prompt);
+      dashboardContent.innerHTML = formatAiResponseAsChecklist(aiText);
+      dashboardTitle.innerText = `Action Plan for: ${userInput}`;
+      savePlan();
+      submitBtn.disabled = false;
+      inputField.value = '';
+    }
+
+    async function refinePlan() {
+      dashboardContent.innerHTML = "⏳ Refining...";
+      const originalPrompt = dashboardTitle.innerText.replace("Action Plan for: ", "");
+      const currentPlanText = Array.from(dashboardContent.querySelectorAll('label')).map(l => l.innerText).join('\n');
+      const prompt = `You are "Clixio". A user wants to refine a plan. Their original goal was "${originalPrompt}". The current plan is:\n\n${currentPlanText}\n\nProvide a new, improved version as a numbered list. Start the list immediately.`;
+      const aiText = await callOpenAI(prompt);
+      dashboardContent.innerHTML = formatAiResponseAsChecklist(aiText);
+      savePlan();
+    }
+
+    async function anticipateHurdles() {
+      hurdlesContainer.style.display = "block";
+      hurdlesContent.innerHTML = "⏳ Analyzing potential hurdles...";
+      const originalPrompt = dashboardTitle.innerText.replace("Action Plan for: ", "");
+      const currentPlanText = Array.from(dashboardContent.querySelectorAll('label')).map(l => l.innerText).join('\n');
+      const prompt = `A user's goal is "${originalPrompt}" and their plan is:\n${currentPlanText}\n\nWhat are 3 potential hurdles they might face? For each hurdle, suggest a brief actionable strategy to overcome it. Format clearly with headings.`;
+      const aiText = await callOpenAI(prompt);
+      hurdlesContent.innerHTML = aiText.replace(/\n/g, '<br>');
+    }
+
+    async function expandStep(task) {
+      showModal(`Deep Dive: ${task}`, "⏳ Thinking...");
+      const originalPrompt = dashboardTitle.innerText.replace("Action Plan for: ", "");
+      const prompt = `A user's main goal is "${originalPrompt}". They are currently focused on this specific step: "${task}". Provide a more detailed breakdown, helpful tips, or sub-steps. Keep it concise and actionable.`;
+      const aiText = await callOpenAI(prompt);
+      showModal(`Deep Dive: ${task}`, aiText);
+    }
+
+    document.addEventListener('DOMContentLoaded', loadPlan);
+
+    getStartedBtn.addEventListener('click', () => {
+      inputField.focus();
+      inputField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      showToast("Enter your goal above to get started!");
+    });
+
+    submitBtn.addEventListener('click', () => {
+      const userInput = inputField.value.trim();
+      if (!userInput) { showToast("Please enter a goal or idea first!"); return; }
+      generatePlan(userInput);
+    });
+
+    inputField.addEventListener('keypress', (e) => { if (e.key === 'Enter') submitBtn.click(); });
+
+    refineBtn.addEventListener('click', () => {
+      if (!dashboardContent.querySelector('ul')) { showToast("Generate a plan first!"); return; }
+      refinePlan();
+    });
+
+    hurdlesBtn.addEventListener('click', () => {
+      if (!dashboardContent.querySelector('ul')) { showToast("Generate a plan first!"); return; }
+      anticipateHurdles();
+    });
+
+    dashboardContent.addEventListener('click', (event) => {
+      if (event.target.classList.contains('expand-step-btn')) {
+        expandStep(event.target.dataset.task);
+      }
+    });
+
+    editBtn.addEventListener('click', () => {
+      isEditable = !isEditable;
+      const labels = dashboardContent.querySelectorAll('label');
+      labels.forEach(label => {
+        label.contentEditable = isEditable;
+        label.style.outline = isEditable ? "1px dashed #ffcc70" : "none";
+        label.style.padding = isEditable ? "2px 6px" : "0";
+        label.style.borderRadius = "6px";
+      });
+      if (isEditable) {
+        editBtn.innerHTML = '<i class="fa-solid fa-check"></i> Done';
+        showToast("Click on any step to edit it.");
+      } else {
+        editBtn.innerHTML = '<i class="fa-solid fa-pen"></i> Edit';
+        savePlan();
+        showToast("Changes saved!");
+      }
+    });
+
+    saveBtn.addEventListener('click', () => { savePlan(); showToast("Plan Saved!"); });
+
+    exportBtn.addEventListener('click', () => {
+      const labels = dashboardContent.querySelectorAll('label');
+      if (labels.length === 0) { showToast("Nothing to export!"); return; }
+      let textToExport = `Action Plan for: ${dashboardTitle.innerText.replace("Action Plan for: ", "")}\n\n`;
+      labels.forEach((label, index) => { textToExport += `${index + 1}. ${label.innerText}\n`; });
+      const blob = new Blob([textToExport], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'clixio-action-plan.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("Plan exported as a .txt file!");
+    });
+
+    dashboardContent.addEventListener('change', (event) => {
+      if (event.target.type === 'checkbox') savePlan();
+    });
+
+    modalCloseBtn.addEventListener('click', hideModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
+  </script>
+</body>
+</html>

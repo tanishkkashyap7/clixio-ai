@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-image: url("flat-lay-desktop-with-agenda-magnifying-glass.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .text {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            font-size: 28px;
+            font-weight: 600;
+            color: #333;
+        }
+        .imp {
+            max-width: 380px;
+            background: rgba(255, 255, 255, 0.85);
+            margin: 50px auto; 
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .t {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 24px;
+            color: #444;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #333;
+        }
+        input {
+            padding: 12px;
+            font-size: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 8px rgba(106,17,203,0.4);
+        }
+        .sub {
+            display: block;
+            margin: 20px auto 0;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .sub:hover { 
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #2575fc, #6a11cb);
+        }
+        footer {
+            font-size: 16px;
+            margin-top: 60px;
+            text-align: center;
+            color: #fff;
+            background: #111;
+            padding: 25px 20px; 
+        }
+        .social-icons a {
+            margin: 0 12px;
+            font-size: 28px;
+            text-decoration: none;
+            color: #fff;
+            transition: 0.3s;
+        }
+        .social-icons a:hover {
+            color: #6a11cb;
+        }
+        .sign{
+            text-align: center;
+        }
+        #message {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text">Welcome to CLIXIO</h1>
+    <div class="imp">
+        <h2 class="t">Login to Continue</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="Username">Username</label>
+                <input type="text" id="Username" name="Username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="Password">Password</label>
+                <input type="password" name="Password" id="Password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="sub">Login</button>
+        </form>
+        <div id="message"></div>
+        <p class="sign"> Don't have an account?<br>
+             <a href="signup.html"> Signup here</a>
+        </p>
+    </div>
+
+    <footer>
+        <p>All rights reserved © CLIXIO.in</p>
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+    </footer>
+
+    <script>
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const messageDiv = document.getElementById('message');
+    messageDiv.style.display = 'block';
+    messageDiv.className = 'success';
+    messageDiv.innerHTML = 'Login successful! Redirecting...';
+
+    // Store dummy data in localStorage
+    localStorage.setItem('authToken', 'dummy-token');
+    localStorage.setItem('user', JSON.stringify({ username: "guest" }));
+
+    // Redirect after 2 seconds
+    setTimeout(() => {
+        window.location.href = 'website.html';
+    }, 2000);
+});
+</script>
+
+</body>
+</html>
