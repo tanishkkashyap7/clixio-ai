@@ -25,14 +25,10 @@ const groq = new Groq({
 });
 
 // ---------- CORS ----------
-const allowedOrigins = process.env.ALLOWED_ORIGINS === '*'
-  ? '*'
-  : process.env.ALLOWED_ORIGINS?.split(',').map(o => o.trim());
-
 app.use(cors({
-  origin: allowedOrigins,
-  methods: ['GET', 'POST'],
-  credentials: true,
+  origin: "*",
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"]
 }));
 
 // ---------- MIDDLEWARE ----------
