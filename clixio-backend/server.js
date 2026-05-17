@@ -1,9 +1,10 @@
-// server.js
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const rateLimit = require('express-rate-limit');
-const Groq = require('groq-sdk');
+import dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
+import rateLimit from "express-rate-limit";
+import Groq from "groq-sdk";
+
+dotenv.config();
 
 // ---------- CONFIG ----------
 const app = express();
